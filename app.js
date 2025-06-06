@@ -32,6 +32,13 @@ app.get("/health", (req, res) => {
   });
 });
 
+app.get("/checkflow", (req, res) => {
+  res.status(200).json({
+    status: "Workflow Working",
+    timestamp: new Date().toISOString(),
+  });
+});
+
 app.use((req, res, next) => {
   res.status(404).json({
     message: "Route not found",
