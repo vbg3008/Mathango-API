@@ -1,0 +1,20 @@
+[
+  {
+    "subject": "Physics",
+    "chapter": "Mathematics in Physics",
+    "class": "Class 11",
+    "unit": "Mechanics 1",
+    "yearWiseQuestionCount": [
+      { "year": 2019, "questionCount": 0 },
+      { "year": 2020, "questionCount": 2 },
+      { "year": 2021, "questionCount": 5 },
+      { "year": 2022, "questionCount": 5 },
+      { "year": 2023, "questionCount": 3 },
+      { "year": 2024, "questionCount": 7 },
+      { "year": 2025, "questionCount": 6 }
+    ],
+    "questionSolved": 0,
+    "status": "Not Started",
+    "isWeakChapter": false
+  },
+]
