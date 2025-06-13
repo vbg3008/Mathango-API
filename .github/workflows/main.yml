@@ -1,4 +1,4 @@
-name: Build and Deploy to GCP EC2
+name: Build and Deploy to GCP VM
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
       - name: Push Docker Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/mathango-app:latest
 
-      - name: SSH into EC2 and Deploy
+      - name: SSH into GCP VM and Deploy
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -31,4 +31,12 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/mathango-app:latest
             docker stop mathango-app || true
             docker rm mathango-app || true
-            docker run -d -p 8000:8000 --name mathango-app ${{ secrets.DOCKER_USERNAME }}/mathango-app:latest
+            docker run -d -p 8000:8000 \
+              --name mathango-app \
+              -e PORT=${{ secrets.ENV_PORT }} \
+              -e MONGO_URI=${{ secrets.ENV_MONGO_URI }} \
+              -e REDIS_USERNAME=${{ secrets.ENV_REDIS_USERNAME }} \
+              -e REDIS_PASSWORD=${{ secrets.ENV_REDIS_PASSWORD }} \
+              -e REDIS_SOCKET=${{ secrets.ENV_REDIS_SOCKET }} \
+              -e REDIS_PORT=${{ secrets.ENV_REDIS_PORT }} \
+              ${{ secrets.DOCKER_USERNAME }}/mathango-app:latest
