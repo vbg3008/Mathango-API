@@ -38,7 +38,7 @@ jobs:
 
             echo "Starting new container with DNS override..."
             docker run -d -p 8000:8000 \
-              --dns=8.8.8.8 --dns=8.8.4.4 \
+              --dns=8.8.8.8 --dns=8.8.4.4 \   # 👈 ADD THIS LINE
               --name mathango-app \
               -e PORT=${{ secrets.PORT }} \
               -e MONGO_URI="${{ secrets.MONGO_URI }}" \
